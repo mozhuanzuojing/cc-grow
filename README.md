@@ -77,3 +77,8 @@ cp -r .claude/agents/ <你的项目>/.claude/agents/
 - [Claude Code Agent 完全指南](references/claude-code-agent-guide.md)
 - [10 Essential Agents (英文原文)](references/claude-code-essential-agents-en.md)
 - [10 Essential Agents (中文翻译)](references/claude-code-essential-agents-zh.md)
+
+## 鸣谢
+
+- [Claude Code Essential Agents](https://claude-world.com/articles/claude-code-essential-agents/) — 10 个 Agent 的原始出处
+- [Claude Code Agent 功能完全指南](https://zhuanlan.zhihu.com/p/2021463943432926727) — 中文完全指南原作者
