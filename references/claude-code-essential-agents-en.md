@@ -39,7 +39,7 @@ You: Use code-reviewer agent to check src/auth/ code
 
 **File**: `.claude/agents/code-reviewer.md`
 
-```markdown
+````markdown
 # code-reviewer
 
 Code review expert - Check quality, security, best practices
@@ -98,7 +98,7 @@ You are a senior code review expert. When reviewing code, focus on:
 - "code review"
 - "PR review"
 - "check code"
-```
+````
 
 ---
 
@@ -108,7 +108,7 @@ You are a senior code review expert. When reviewing code, focus on:
 
 **File**: `.claude/agents/debugger.md`
 
-```markdown
+````markdown
 # debugger
 
 Debugging expert - Analyze errors, trace root causes
@@ -168,7 +168,7 @@ You are a debugging expert. When receiving errors:
 - "error"
 - "bug"
 - "not working"
-```
+````
 
 ---
 
@@ -178,7 +178,7 @@ You are a debugging expert. When receiving errors:
 
 **File**: `.claude/agents/test-writer.md`
 
-```markdown
+````markdown
 # test-writer
 
 Testing expert - Write comprehensive tests for code
@@ -226,7 +226,7 @@ should_[expected_behavior]_when_[condition]
 - "write tests"
 - "add tests"
 - "test coverage"
-```
+````
 
 ---
 
@@ -236,7 +236,7 @@ should_[expected_behavior]_when_[condition]
 
 **File**: `.claude/agents/security-auditor.md`
 
-```markdown
+````markdown
 # security-auditor
 
 Security audit expert - Identify vulnerabilities, ensure security
@@ -300,7 +300,7 @@ You are a security expert. When auditing, focus on:
 - "security audit"
 - "security check"
 - "vulnerability"
-```
+````
 
 ---
 
@@ -310,7 +310,7 @@ You are a security expert. When auditing, focus on:
 
 **File**: `.claude/agents/doc-writer.md`
 
-```markdown
+````markdown
 # doc-writer
 
 Documentation expert - README, API docs, code comments
@@ -364,7 +364,7 @@ You are a technical documentation expert. When writing:
 - "documentation"
 - "README"
 - "API docs"
-```
+````
 
 **Cost optimization**: Documentation uses `haiku` model, lower cost.
 
@@ -376,7 +376,7 @@ You are a technical documentation expert. When writing:
 
 **File**: `.claude/agents/git-expert.md`
 
-```markdown
+````markdown
 # git-expert
 
 Git expert - Version control, branch management, conflict resolution
@@ -433,7 +433,7 @@ chore: Maintenance
 - "commit"
 - "merge conflict"
 - "branch"
-```
+````
 
 ---
 
@@ -443,7 +443,7 @@ chore: Maintenance
 
 **File**: `.claude/agents/api-designer.md`
 
-```markdown
+````markdown
 # api-designer
 
 API design expert - RESTful design, OpenAPI specifications
@@ -500,7 +500,7 @@ You are an API design expert. When designing, follow:
 - "API design"
 - "REST API"
 - "OpenAPI"
-```
+````
 
 ---
 
@@ -510,7 +510,7 @@ You are an API design expert. When designing, follow:
 
 **File**: `.claude/agents/performance-optimizer.md`
 
-```markdown
+````markdown
 # performance-optimizer
 
 Performance optimization expert - Identify bottlenecks, provide optimization suggestions
@@ -572,7 +572,7 @@ You are a performance optimization expert. When analyzing, focus on:
 - "performance"
 - "optimize"
 - "slow"
-```
+````
 
 ---
 
@@ -582,7 +582,7 @@ You are a performance optimization expert. When analyzing, focus on:
 
 **File**: `.claude/agents/database-expert.md`
 
-```markdown
+````markdown
 # database-expert
 
 Database expert - Schema design, query optimization, Migration
@@ -637,7 +637,7 @@ You are a database expert. Handle:
 - "SQL"
 - "migration"
 - "schema"
-```
+````
 
 ---
 
@@ -647,7 +647,7 @@ You are a database expert. Handle:
 
 **File**: `.claude/agents/refactor-assistant.md`
 
-```markdown
+````markdown
 # refactor-assistant
 
 Refactoring expert - Improve code quality without changing behavior
@@ -698,7 +698,7 @@ You are a refactoring expert. When refactoring, follow:
 - "refactor"
 - "clean up"
 - "improve code"
-```
+````
 
 ---
 
@@ -745,4 +745,5 @@ With these Agents, recommended reading:
 *Last updated: 2026-01-19*
 
 ---
+
 *Copied from ClaudeWorld.dev - Claude Code Mastery Resource*

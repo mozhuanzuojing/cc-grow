@@ -1,17 +1,13 @@
+---
+name: code-reviewer
+description: 审查代码质量、安全性和可维护性。代码变更、PR 审查时自动调用。
+tools: Read, Grep, Glob
+model: sonnet
+---
+
 # code-reviewer
 
 代码审查专家 — 检查代码质量、安全性和最佳实践
-
-## 配置
-
-```yaml
-model: sonnet
-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
-```
 
 ## 系统提示词
 

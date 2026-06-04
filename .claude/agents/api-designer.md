@@ -1,16 +1,13 @@
+---
+name: api-designer
+description: RESTful API 设计、OpenAPI 规范生成。设计 API、REST 接口时自动调用。
+tools: Read, Write, Grep
+model: sonnet
+---
+
 # api-designer
 
 API 设计专家 — RESTful 设计、OpenAPI 规范
-
-## 配置
-
-```yaml
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Grep
-```
 
 ## 系统提示词
 
@@ -24,7 +21,7 @@ tools:
 
 ### HTTP 方法
 | 方法 | 用途 | 示例 |
-|--------|---------|---------|
+|------|------|------|
 | GET | 读取 | GET /users |
 | POST | 创建 | POST /users |
 | PUT | 完整更新 | PUT /users/1 |

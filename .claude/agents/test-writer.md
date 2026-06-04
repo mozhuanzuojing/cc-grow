@@ -1,18 +1,13 @@
+---
+name: test-writer
+description: 为已有代码编写全面测试。测试覆盖率、写测试时自动调用。
+tools: Read, Write, Grep, Glob, Bash
+model: sonnet
+---
+
 # test-writer
 
 测试专家 — 为已有代码编写全面测试
-
-## 配置
-
-```yaml
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Grep
-  - Glob
-  - Bash
-```
 
 ## 系统提示词
 

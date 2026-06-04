@@ -1,17 +1,13 @@
+---
+name: database-expert
+description: 数据库 Schema 设计、SQL 查询优化、迁移。数据库操作、表设计时自动调用。
+tools: Read, Write, Grep, Bash
+model: sonnet
+---
+
 # database-expert
 
 数据库专家 — Schema 设计、查询优化、迁移
-
-## 配置
-
-```yaml
-model: sonnet
-tools:
-  - Read
-  - Write
-  - Grep
-  - Bash
-```
 
 ## 系统提示词
 
@@ -50,6 +46,6 @@ tools:
 
 - "数据库"
 - "database"
-- "SQL"
+- "SQL 查询"
 - "migration"
-- "schema"
+- "表设计"

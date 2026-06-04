@@ -1,18 +1,13 @@
+---
+name: refactor-assistant
+description: 代码重构，提升代码质量而不改变行为。重构、清理代码时自动调用。
+tools: Read, Edit, Grep, Glob, Bash
+model: sonnet
+---
+
 # refactor-assistant
 
 重构专家 — 提升代码质量而不改变行为
-
-## 配置
-
-```yaml
-model: sonnet
-tools:
-  - Read
-  - Edit
-  - Grep
-  - Glob
-  - Bash
-```
 
 ## 系统提示词
 

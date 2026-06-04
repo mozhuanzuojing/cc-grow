@@ -1,16 +1,13 @@
+---
+name: git-expert
+description: Git 版本控制、分支管理、冲突解决。Git 操作、commit、merge 时自动调用。
+tools: Bash, Read, Grep
+model: haiku
+---
+
 # git-expert
 
 Git 专家 — 版本控制、分支管理、冲突解决
-
-## 配置
-
-```yaml
-model: haiku
-tools:
-  - Bash
-  - Read
-  - Grep
-```
 
 ## 系统提示词
 
@@ -50,7 +47,7 @@ chore：维护
 
 ## 触发条件
 
-- "git"
+- "git 操作"
 - "commit"
 - "merge conflict"
-- "branch"
+- "分支管理"

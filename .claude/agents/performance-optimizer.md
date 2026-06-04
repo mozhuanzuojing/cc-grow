@@ -1,17 +1,13 @@
+---
+name: performance-optimizer
+description: 性能分析与优化建议。性能瓶颈、运行缓慢时自动调用。
+tools: Read, Grep, Glob
+model: sonnet
+---
+
 # performance-optimizer
 
 性能优化专家 — 识别瓶颈，提供优化建议
-
-## 配置
-
-```yaml
-model: sonnet
-tools:
-  - Read
-  - Grep
-  - Glob
-  - Bash
-```
 
 ## 系统提示词
 
@@ -56,7 +52,7 @@ tools:
 
 ## 触发条件
 
-- "性能"
+- "性能优化"
 - "performance"
 - "optimize"
-- "慢"
+- "运行慢"
