@@ -7,6 +7,45 @@
 ```bash
 # 复制到你的项目即可使用
 cp -r .claude/agents/ <你的项目>/.claude/agents/
+# 重启 Claude Code，Agent 自动生效
+```
+
+## 使用方法
+
+### 自动匹配
+
+描述任务时包含自然语言触发词，Claude 自动调度对应 Agent：
+
+```
+> 审查一下这次提交的代码变更     → code-reviewer 自动介入
+> 这个测试一直挂帮我看看          → debugger 自动介入
+> 帮我设计用户模块的 API          → api-designer 自动介入
+```
+
+### 手动指名
+
+直接指定 Agent 名称：
+
+```
+> 用 code-reviewer 审查 src/auth/ 目录
+> 让 security-auditor 扫描整个项目
+```
+
+### 流水线串联
+
+三个 Agent 接力完成从需求到代码的全流程：
+
+```
+> 新功能：用户可导出数据为 CSV。
+> 先用 pm-spec 写规格，再 architect 设计，最后 implementer 实现
+```
+
+```
+┌──────────┐     specs/foo.md     ┌───────────┐  specs/foo-arch.md  ┌──────────────┐
+│  pm-spec │ ──────────────────→ │ architect │ ──────────────────→ │ implementer  │
+│ 产品规格  │                     │ 技术设计   │                     │ 代码实现+测试  │
+└──────────┘                     └───────────┘                     └──────────────┘
+   sonnet                           sonnet                            sonnet
 ```
 
 ## Agent 清单
@@ -37,3 +76,4 @@ cp -r .claude/agents/ <你的项目>/.claude/agents/
 
 - [Claude Code Agent 完全指南](references/claude-code-agent-guide.md)
 - [10 Essential Agents (英文原文)](references/claude-code-essential-agents-en.md)
+- [10 Essential Agents (中文翻译)](references/claude-code-essential-agents-zh.md)

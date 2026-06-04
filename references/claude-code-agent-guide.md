@@ -2,7 +2,11 @@
 
 > 这是 Claude Code 中文手册系列的第三篇。第一篇讲 CLI 启动参数，第二篇讲交互式 Slash 命令，这篇专门深挖 Agent 体系。
 
-*最后更新: 2026-03*
+原文出处: Claude Code 中文手册系列
+
+---
+
+Claude Code 的 Agent 功能让你可以创建专门的 AI 助手来处理特定任务。本指南从零开始，深入讲解三种 Agent 模式、实战案例、以及成本控制策略，**每个案例均可直接复制使用**。
 
 ---
 
@@ -37,7 +41,7 @@
 
 ---
 
-## 第一章：三种 Agent 模式——用哪个？
+## 第一章：三种 Agent 模式 — 用哪个？
 
 Claude Code 提供三种并行工作的方式，从轻到重：
 
@@ -67,7 +71,7 @@ Token 消耗低           Token 消耗中                 Token 消耗高（线�
 
 ---
 
-## 第二章：子 Agent（Subagent）—— 你的专项外包
+## 第二章：子 Agent（Subagent）：你的专项外包
 
 ### 是什么
 
@@ -100,18 +104,23 @@ Token 消耗低           Token 消耗中                 Token 消耗高（线�
 
 ### 实战案例 1：代码审查 Agent
 
-创建文件 `.claude/agents/code-reviewer.md`：
+**用途**: 审查代码质量、安全性和可维护性。代码变更、PR 审查时自动调用。
 
-```yaml
+**文件**: `.claude/agents/code-reviewer.md`
+
+````markdown
 ---
 name: code-reviewer
 description: 审查代码质量、安全性和可维护性。代码变更、PR 审查时自动调用。
 tools: Read, Grep, Glob
 model: sonnet
 ---
-```
 
-**系统提示词：**
+# code-reviewer
+
+代码审查专家 — 检查代码质量、安全性和最佳实践
+
+## 系统提示词
 
 你是一个有 10 年经验的高级代码审查员。
 
@@ -126,15 +135,13 @@ model: sonnet
 
 输出格式：按风险等级从高到低排列，每条包含文件路径、行号、问题描述和修复代码。
 
-**使用方式：**
+## 触发条件
 
-```
-# 方式 A：Claude 自动调用（你提到"审查"相关的需求时）
-> 审查一下我这次提交的代码变更
-
-# 方式 B：你手动指名调用
-> 用 code-reviewer 审查 src/auth/ 目录下的所有变更
-```
+- "审查代码"
+- "code review"
+- "PR review"
+- "检查代码"
+````
 
 **关键配置解释：**
 
@@ -144,20 +151,37 @@ model: sonnet
 | `model: sonnet` | 用 Sonnet 而非 Opus，省钱。代码审查不需要最强推理 |
 | `description` 关键词 | "代码变更""PR 审查"→ Claude 自动匹配调用 |
 
+### 使用方式
+
+```
+# 方式 A：Claude 自动调用（你提到"审查"相关的需求时）
+> 审查一下我这次提交的代码变更
+
+# 方式 B：你手动指名调用
+> 用 code-reviewer 审查 src/auth/ 目录下的所有变更
+```
+
+---
+
 ### 实战案例 2：调试专家 Agent
 
-创建文件 `.claude/agents/debugger.md`：
+**用途**: 调试错误、测试失败和异常行为。遇到 bug 时自动调用。
 
-```yaml
+**文件**: `.claude/agents/debugger.md`
+
+````markdown
 ---
 name: debugger
 description: 调试错误、测试失败和异常行为。遇到 bug 时自动调用。
 tools: Read, Edit, Bash, Grep, Glob
-model: opus
+model: sonnet
 ---
-```
 
-**系统提示词：**
+# debugger
+
+调试专家 — 分析错误，追溯根因
+
+## 系统提示词
 
 你是一个专精于根因分析的调试专家。
 
@@ -175,18 +199,30 @@ model: opus
 - 具体的修复代码
 - 防止复发的建议
 
-**使用场景：**
+## 触发条件
 
+- "调试"
+- "debug"
+- "报错"
+- "bug"
+- "不工作"
+````
+
+**使用场景：**
 ```
 > 这个测试一直挂，帮我 debug：npm test -- --grep "auth middleware"
-
-# Claude 判断这是调试任务 → 自动调用 debugger Agent
-# debugger 在独立上下文中：
-#   1. 执行测试命令看完整错误输出
-#   2. 读取相关源代码文件
-#   3. 分析、定位、修复
-# 把修复结果返回给主会话
 ```
+
+> **💡 Claude 执行过程：**
+>
+> // Claude 判断这是调试任务 → 自动调用 debugger Agent
+> // debugger 在独立上下文中：
+> //   1. 执行测试命令看完整错误输出
+> //   2. 读取相关源代码文件
+> //   3. 分析、定位、修复
+> // 把修复结果返回给主会话
+
+---
 
 ### 实战案例 3：一人开发流水线
 
@@ -196,16 +232,23 @@ model: opus
 pm-spec（产品经理）→ architect（架构师）→ implementer（实现者）
 ```
 
-#### Agent 1：产品经理 `.claude/agents/pm-spec.md`
+**Agent 1：产品经理** — 文件 `.claude/agents/pm-spec.md`
 
-```yaml
+**用途**: 将需求描述转化为结构化的产品规格文档。
+
+````markdown
 ---
 name: pm-spec
 description: 将需求描述转化为结构化的产品规格文档
-tools: Read, Grep, Glob
+tools: Read, Write, Grep, Glob
 model: sonnet
 ---
-```
+
+# pm-spec
+
+产品经理 Agent — 将需求描述转化为结构化的产品规格文档
+
+## 系统提示词
 
 你是产品经理。接收一个功能需求的简短描述，输出：
 1. 功能摘要（一段话）
@@ -216,16 +259,31 @@ model: sonnet
 
 输出保存为 `specs/[功能名].md` 文件。
 
-#### Agent 2：架构师 `.claude/agents/architect.md`
+## 触发条件
 
-```yaml
+- "产品规格"
+- "需求分析"
+- "用户故事"
+- "pm spec"
+````
+
+**Agent 2：架构师** — 文件 `.claude/agents/architect.md`
+
+**用途**: 审查产品规格并输出技术设计文档。
+
+````markdown
 ---
 name: architect
 description: 审查产品规格并输出技术设计文档
-tools: Read, Grep, Glob
-model: opus
+tools: Read, Write, Grep, Glob
+model: sonnet
 ---
-```
+
+# architect
+
+系统架构师 Agent — 审查产品规格并输出技术设计文档
+
+## 系统提示词
 
 你是系统架构师。读取产品经理输出的规格文档，输出：
 1. 技术方案选型（有哪些选择、为什么选这个）
@@ -236,22 +294,45 @@ model: opus
 
 输出保存为 `specs/[功能名]-architecture.md` 文件。
 
-#### Agent 3：实现者 `.claude/agents/implementer.md`
+## 触发条件
 
-```yaml
+- "架构设计"
+- "architecture"
+- "技术方案"
+- "系统设计"
+````
+
+**Agent 3：实现者** — 文件 `.claude/agents/implementer.md`
+
+**用途**: 根据架构设计文档实现代码并编写测试。
+
+````markdown
 ---
 name: implementer
 description: 根据架构设计文档实现代码并编写测试
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: sonnet
 ---
-```
+
+# implementer
+
+全栈实现 Agent — 根据架构设计文档实现代码并编写测试
+
+## 系统提示词
 
 你是全栈开发工程师。读取架构设计文档，执行：
 1. 按照文件变更清单逐个实现
 2. 为每个新功能编写单元测试
 3. 运行 lint 和测试确保通过
 4. 输出变更摘要
+
+## 触发条件
+
+- "实现功能"
+- "implement"
+- "功能开发"
+- "写代码实现"
+````
 
 **串联使用：**
 
@@ -266,6 +347,8 @@ model: sonnet
 ```
 
 这个流程的价值在于：每个 Agent 各自用自己的上下文窗口，主会话几乎不消耗上下文。即使是大型功能开发，你的主会话也能保持清爽。
+
+---
 
 ### 实战案例 4：只读探索 Agent
 
@@ -317,7 +400,7 @@ skills:                      # 预加载的 Skills
 
 ---
 
-## 第三章：后台任务 —— 不阻塞你的对话
+## 第三章：后台任务：不阻塞你的对话
 
 ### 是什么
 
@@ -363,7 +446,7 @@ Ctrl+T          # 快捷键：切换任务列表显示
 
 ---
 
-## 第四章：Agent Team —— 真正的 AI 团队
+## 第四章：Agent Team：真正的 AI 团队
 
 ### 是什么
 
@@ -432,6 +515,8 @@ claude
 
 > **关键技巧：用目录隔离防止冲突。** 每个 Teammate 只操作自己的目录，不会出现两个 Agent 同时改同一个文件的情况——这是 Agent Team 最常见的坑。
 
+---
+
 ### 实战案例 2：一周社交媒体内容生产
 
 Agent Team 不只能写代码。有人用它做了一个内容生产流水线。
@@ -447,6 +532,8 @@ Agent Team 不只能写代码。有人用它做了一个内容生产流水线。
 > 所有最终内容保存到 content/week-[日期]/ 目录。
 ```
 
+---
+
 ### 实战案例 3：数据库迁移安全网
 
 ```
@@ -459,6 +546,8 @@ Agent Team 不只能写代码。有人用它做了一个内容生产流水线。
 > # 亮点：Teammate 2 发现问题后可直接发消息给 Teammate 1
 > # 要求修改，不需要经过你中转 — 这是 Agent Team 的核心优势
 ```
+
+---
 
 ### 实战案例 4：接手陌生代码库的高效方式
 
@@ -495,7 +584,7 @@ Shift+Tab        # 切换模式：Normal → Auto-Accept → Plan → Delegate
 
 ---
 
-## 第五章：省钱心法——不同 Agent 模式的成本控制
+## 第五章：省钱心法：不同 Agent 模式的成本控制
 
 Agent 功能是 Claude Code 最烧钱的地方。以下是经过验证的省钱策略：
 
@@ -599,6 +688,10 @@ Agent Team 的额外成本来自：
 # "你每次手动指定 code-reviewer 时都用 opus，建议改成 sonnet 可节省 40% 费用"
 # "你的 debugger Agent 平均每次读取 45 个文件，建议限制搜索范围"
 ```
+
+---
+
+*最后更新: 2026-03*
 
 ---
 
